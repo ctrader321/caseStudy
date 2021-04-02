@@ -1,7 +1,10 @@
 h1{
-    color:blue;
+    color:red;
 }
 
 h6 {
     color: #AFBADC;
+}
+input {
+	border-radius: 25px;
 }

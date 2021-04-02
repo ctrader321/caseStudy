@@ -1,46 +1,46 @@
 package com.WatchlistAndTracker.entities;
 
+import java.beans.JavaBean;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
 
 
-
 @Entity
+@Table(name="Users")
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int Id;
-	
 	@Column(nullable=false, length=30)
 	private String username;
 	
 	@Column(nullable=false, length=30)
 	private String userPassword;
-
-	@Transient //doesn't persist;
-	private String passwordConfirm;
 	
-	@JoinTable(name="user_current")
-	@OneToMany(targetEntity = Show.class, fetch= FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@OneToMany(targetEntity = Show.class, fetch= FetchType.LAZY, cascade=CascadeType.PERSIST)
 	private List<Show> currentShowList;
 	
-	@JoinTable(name="user_backlog")
-	@OneToMany(targetEntity = Show.class, fetch= FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@OneToMany(targetEntity = Show.class, fetch= FetchType.LAZY, cascade=CascadeType.PERSIST)
 	private List<Show> backlogShowList;
 	
 	
 	public User() {
 		super();
 	}
-	public User(Integer id, String username, String userPassword) {
+	public User(String username, String userPassword) {
 		super();
-		Id = id;
 		this.username = username;
 		this.userPassword = userPassword;
 	}
 
+	public User(String username, String userPassword, List<Show> currentShowList, List<Show> backlogShowList) {
+		super();
+		this.username = username;
+		this.userPassword = userPassword;
+		this.currentShowList = currentShowList;
+		this.backlogShowList = backlogShowList;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -55,14 +55,6 @@ public class User {
 
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
-	}
-
-	public Integer getId() {
-		return Id;
-	}
-
-	public void setId(Integer Id) {
-		this.Id = Id;
 	}
 	
 	public List<Show> getBacklogShowList() {
@@ -80,4 +72,51 @@ public class User {
 	public void setCurrentShowList(List<Show> currentShowList) {
 		this.currentShowList = currentShowList;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((backlogShowList == null) ? 0 : backlogShowList.hashCode());
+		result = prime * result + ((currentShowList == null) ? 0 : currentShowList.hashCode());
+		result = prime * result + ((userPassword == null) ? 0 : userPassword.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (backlogShowList == null) {
+			if (other.backlogShowList != null)
+				return false;
+		} else if (!backlogShowList.equals(other.backlogShowList))
+			return false;
+		if (currentShowList == null) {
+			if (other.currentShowList != null)
+				return false;
+		} else if (!currentShowList.equals(other.currentShowList))
+			return false;
+		if (userPassword == null) {
+			if (other.userPassword != null)
+				return false;
+		} else if (!userPassword.equals(other.userPassword))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", userPassword=" + userPassword + ", currentShowList=" + currentShowList
+				+ ", backlogShowList=" + backlogShowList + "]";
+	}
 }
+

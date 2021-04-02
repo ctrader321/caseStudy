@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="RankingGames">
-		<class>com.WatchlistAndTracker.entities.Show</class>
-		<class>com.WatchlistAndTracker.entities.User</class>
-		
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit
+		name="WatchlistAndTracker">
+				
 		<properties>
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mariadb://localhost:3306/tracker_and_watchlist" />
@@ -23,5 +25,6 @@
 
 			<property name="eclipselink.logging.level" value="SEVERE" />
 		</properties>
+
 	</persistence-unit>
 </persistence>

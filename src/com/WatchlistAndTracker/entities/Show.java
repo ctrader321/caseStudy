@@ -13,41 +13,21 @@ import javax.persistence.Table;
 public class Show {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int Id;
-	
 	@Column(name="name")
 	private String showName;
-	
-	@Column(name="current_episode")
-	private int currentEpisode;
 	
 	@Column(name="total_episode")
 	private int totalEpisodes;
 	
-	@Column(name="completion_percentage")
-	private float percentageCompleted;
 	
 	public Show() {
 		super();
 	}
 	
-	public Show(int id, String showName, int currentEpisode, int totalEpisodes, float percentageCompleted) {
+	public Show(String showName, int totalEpisodes) {
 		super();
-		Id = id;
 		this.showName = showName;
-		this.currentEpisode = currentEpisode;
 		this.totalEpisodes = totalEpisodes;
-		this.percentageCompleted = percentageCompleted;
-	}
-
-	public int getId() {
-		return Id;
-	}
-	
-	
-	public void setId(Integer id) {
-		Id = id;
 	}
 
 	public String getShowName() {
@@ -58,13 +38,6 @@ public class Show {
 		this.showName = showName;
 	}
 
-	public int getCurrentEpisode() {
-		return currentEpisode;
-	}
-
-	public void setCurrentEpisode(Integer currentEpisode) {
-		this.currentEpisode = currentEpisode;
-	}
 
 	public int getTotalEpisodes() {
 		return totalEpisodes;
@@ -74,13 +47,37 @@ public class Show {
 		this.totalEpisodes = totalEpisodes;
 	}
 
-	public float getPercentageCompleted() {
-		return percentageCompleted;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((showName == null) ? 0 : showName.hashCode());
+		result = prime * result + totalEpisodes;
+		return result;
 	}
 
-	public void setPercentageCompleted(Float percentageCompleted) {
-		this.percentageCompleted = percentageCompleted;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Show other = (Show) obj;
+		if (showName == null) {
+			if (other.showName != null)
+				return false;
+		} else if (!showName.equals(other.showName))
+			return false;
+		if (totalEpisodes != other.totalEpisodes)
+			return false;
+		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Show [showName=" + showName + ", totalEpisodes=" + totalEpisodes + "]";
+	}
 
 }

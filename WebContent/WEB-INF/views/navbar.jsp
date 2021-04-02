@@ -11,8 +11,9 @@
 			<div class="navbar-nav">
 				<a class="nav-link" href="#">Home</a>
 				<a class="nav-link" href="#">Watchlists</a>
-				<a class="nav-link" href="#">Search</a> 
 				<a class="nav-link" href="#">Profile</a>
+				<a class="nav-link" href="logout">Logout!</a>
+				
 			</div>
 		</div>
 	</div>
