@@ -1,5 +1,7 @@
 package com.WatchlistAndTracker.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,4 +37,13 @@ public class UserServices{
 		
 	}
 	
+	public User validateUser(String username, String userPassword) {
+		User user = ur.getUserByUsername(username);
+		if (user!= null) {
+			if(user.getUserPassword().equals(userPassword)) {
+				return user;
+			}
+		}
+		return null;
+	}
 }

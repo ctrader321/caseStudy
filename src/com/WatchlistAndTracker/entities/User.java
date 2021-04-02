@@ -1,7 +1,6 @@
 package com.WatchlistAndTracker.entities;
 
-import java.beans.JavaBean;
-import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -17,6 +16,9 @@ public class User {
 	
 	@Column(nullable=false, length=30)
 	private String userPassword;
+	
+	@Transient //doesn't persist to the database;
+	private String verifyPassword;
 	
 	@OneToMany(targetEntity = Show.class, fetch= FetchType.LAZY, cascade=CascadeType.PERSIST)
 	private List<Show> currentShowList;
@@ -57,6 +59,12 @@ public class User {
 		this.userPassword = userPassword;
 	}
 	
+	public String getVerifyPassword() {
+		return verifyPassword;
+	}
+	public void setVerifyPassword(String verifyPassword) {
+		this.verifyPassword = verifyPassword;
+	}
 	public List<Show> getBacklogShowList() {
 		return backlogShowList;
 	}
