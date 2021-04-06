@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <%@include file="headCommon.jsp"%>
-
+<%@ page import="com.WatchlistAndTracker.entities.User"%>
 <style>
 body {
 	font-family: 'ABeeZee', sans-serif;
@@ -11,12 +9,20 @@ body {
 <title>Home</title>
 <%@include file="headCommonEnd.jsp"%>
 <%@include file="navbar.jsp"%>
-
+<%
+	if(session.getAttribute("user") == null){
+		
+		request.setAttribute("loginAgainMessage", "Please sign in!");
+		response.sendRedirect("login");
+	}
+%>
 	<div class="container">
 		<div class="row">
-			<div class="col align-self-start"><span>Hello, ${user.getUsername()} </span></div>
-			<div class="col align-self-center">One of three columns</div>
-			<div class="col align-self-end">One of three columns</div>
+			<div class="col">
+				<p>Hello, ${user.getUsername()}</p>
+			</div>
+			<div class="col"></div>
+			<div class="col"></div>
 		</div>
 	</div>
 

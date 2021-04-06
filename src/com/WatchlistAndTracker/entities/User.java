@@ -20,10 +20,12 @@ public class User {
 	@Transient //doesn't persist to the database;
 	private String verifyPassword;
 	
-	@OneToMany(targetEntity = Show.class, fetch= FetchType.LAZY, cascade=CascadeType.PERSIST)
+	@JoinTable(name="user_currentshowlist")
+	@ManyToMany(targetEntity = Show.class, fetch= FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Show> currentShowList;
 	
-	@OneToMany(targetEntity = Show.class, fetch= FetchType.LAZY, cascade=CascadeType.PERSIST)
+	@JoinTable(name="user_backlogshowlist")
+	@ManyToMany(targetEntity = Show.class, fetch= FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Show> backlogShowList;
 	
 	

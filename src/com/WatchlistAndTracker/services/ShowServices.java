@@ -1,5 +1,7 @@
 package com.WatchlistAndTracker.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,11 @@ public class ShowServices {
 		sr.save(show);
 	}
 	
+	public Show getShow(String showname) {
+		return sr.getShowByShowName(showname);
+	}
 	
+	public List<Show> getAllShows(){
+		return sr.findAll();
+	}
 }

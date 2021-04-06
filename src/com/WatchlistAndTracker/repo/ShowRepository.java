@@ -8,4 +8,5 @@ import com.WatchlistAndTracker.entities.Show;
 @Repository
 public interface ShowRepository extends JpaRepository<Show, String> {
 
+	Show getShowByShowName(String showname);
 }

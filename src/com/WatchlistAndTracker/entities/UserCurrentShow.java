@@ -1,6 +1,7 @@
 package com.WatchlistAndTracker.entities;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,9 @@ import javax.persistence.Table;
 @IdClass(value = UserCurrentShowsId.class)
 @Table(name="user_currentlyWatching")
 public class UserCurrentShow {
+	// using this to automatically format the completion percentage when a new UserCurrentShow is instantiated via constructor.
+	static DecimalFormat df = new DecimalFormat("###.##");
+	
 	@Id
 	private String username;
 	@Id
@@ -26,14 +30,13 @@ public class UserCurrentShow {
 	public UserCurrentShow() {
 		super();
 	}
-	public UserCurrentShow(String username, String showName, int totalEpisodes, int currentEpisode,
-			double completionPercentage) {
+	public UserCurrentShow(String username, String showName, int totalEpisodes, int currentEpisode) {
 		super();
 		this.username = username;
 		this.showName = showName;
 		this.totalEpisodes = totalEpisodes;
 		this.currentEpisode = currentEpisode;
-		this.completionPercentage = completionPercentage;
+		this.completionPercentage = Double.parseDouble(df.format(100*((double)currentEpisode/(double)totalEpisodes)));
 	}
 
 	public String getUsername() {
@@ -72,8 +75,8 @@ public class UserCurrentShow {
 		return completionPercentage;
 	}
 
-	public void setCompletionPercentage(double completionPercentage) {
-		this.completionPercentage = completionPercentage;
+	public void setCompletionPercentage(int currentEpisode, int totalEpisodes) {
+		this.completionPercentage = currentEpisode / totalEpisodes;
 	}
 
 	@Override

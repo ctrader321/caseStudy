@@ -9,11 +9,15 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
-				<a class="nav-text">${ user.getUserName()}</a>
-				<a class="nav-link" href="#">Watchlists</a>
-				<a class="nav-link" href="#">Profile</a>
-				<a class="nav-link" href="logout">Logout!</a>
-				
+				<a class="nav-link" href="#">Home</a> 
+				<a class="nav-link dropdown-toggle" href="#" 
+					id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Watchlists</a>
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<li><a class="dropdown-item" href="backlogWatchlist">Backlog</a></li>
+					<li><a class="dropdown-item" href="currentWatchlist">Current</a></li>
+				</ul>
+					<a class="nav-link" href="logout">Logout!</a>
 			</div>
 		</div>
 	</div>
