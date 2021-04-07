@@ -129,8 +129,10 @@ public class UserCurrentShow {
 	
 }
 
+@SuppressWarnings("serial")
 class UserCurrentShowsId implements Serializable{
 	
+	@SuppressWarnings("unused")
 	private static final long serialVersionUid = -1L;
 	
 	@Id

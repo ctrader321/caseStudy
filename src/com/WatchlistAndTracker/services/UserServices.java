@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.WatchlistAndTracker.entities.Show;
 import com.WatchlistAndTracker.entities.User;
 import com.WatchlistAndTracker.repo.UserRepository;
 

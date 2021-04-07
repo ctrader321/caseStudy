@@ -72,9 +72,10 @@ html, body {
 %>
 	<div class="container">
 		<div class="row" style="padding-top:5%">
-			<div class="col">
-				<p>Hello, ${user.getUsername()}, below is a list of shows our Users are currently keeping track of.</p>
-				<table class = "tg" style="width:80%">
+			<div class="col" style="margin-right:2%">
+				<h3>Thanks for signing up for Anime Watchlist! Below is a record of all the shows currently being tracked by our Users!</h3>
+				<hr>
+				<table class = "tg" style="width:100%">
 					<thead>
 						<tr>
 							<th class="tg-0pky" style="text-align: left">
@@ -105,8 +106,12 @@ html, body {
 					<h2>Please enter a show you want to add!</h2>
 					<input type="text" name="showName" style="width:60%"><br><br>
 					<h2>Please enter the total number of episodes in your show!</h2>
-					<input type="text" name="totalEpisodes" style="width:40%"><br>
+					<input type="text" name="totalEpisodes" id="totalEp" style="width:40%"><br>
+						<script type="text/javascript">
+							document.getElementById("totalEp").value = '0';
+						</script>
 					<input type="submit" name="addShowToForm" value="Add" style="width:40%">
+					<p style="color:red">${showAlreadyInDb}</p>
 				</form>
 			</div>
 		</div>

@@ -1,18 +1,14 @@
-html, body {
-	font-family: 'ABeeZee', sans-serif;
-	background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(226,197,134,1) 100%);
-	height:100%;
-	width:100%;
-	margin:0px;
-	padding:0px;
-}
 h1{
-    color: red;
+    color: #6c757d;
 }
 
 h6 {
     color: #AFBADC;
 }
+
 input {
+	border-radius: 25px;
+}
+select {
 	border-radius: 25px;
 }

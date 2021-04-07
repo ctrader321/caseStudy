@@ -77,7 +77,7 @@ html, body {
 			<div class = "col">
 			<p>Select a show to add (Total episode count)</p>
 			<p style="color:red">${alreadyInList}</p>
-				<form action="addToCurrent" method= "get" style="display:flex; flex-direction:column; justify-content:space-between; width:50%">
+				<form:form action="addToCurrent" methodAttribute="showAdd" method ="get" style="display:flex; flex-direction:column; justify-content:space-between; width:50%">
 					<select name="showName">
 						<c:forEach items="${showList}" var="show" begin="0">
 							<option value="${show.showName}">${show.showName} == ${show.totalEpisodes}</option>
@@ -89,10 +89,10 @@ html, body {
 						document.getElementById("episodeForAddTo").value = '0';
 					</script>
 					<input style="width:50%" type="submit" name="addToCurrent" value="Add"> 				
-				</form>
+				</form:form>
 				<br>
 				<p>Select a show to edit</p> 
-				<form action="editInCurrent" method="get" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%">	
+				<form:form action="editInCurrent" methodAttribute="showEdit" method="get" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%">	
 					<select	name="showName">
 						<c:forEach items="${currentShows}" var="show" begin="0">
 							<option value="${show.showName}">${show.showName}</option>
@@ -103,18 +103,18 @@ html, body {
 						<script type="text/javascript">
 							document.getElementById("episodeForEditIn").value = '0';
 						</script>
-					<input style="width: 50%" type="submit" name="addToCurrent" value="Add">
-				</form>
+					<input style="width: 50%" type="submit" name="addToCurrent" value="Edit">
+				</form:form>
 				<br>
 				<p>Select a show to remove!</p> 
-				<form action="removeFromCurrent" method="get" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%">
+				<form:form action="removeFromCurrent" methodAttribute="showRemove" method="get" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%">
 					<select	name="showName">
 						<c:forEach items="${currentShows}" var="show" begin="0">
 							<option value="${show.showName}">${show.showName}</option>
 						</c:forEach>
 					</select>
 					<input style="width: 50%" type="submit" name="removeFromCurrent" value="Remove">
-				</form>
+				</form:form>
 		</div>
 			<div class = "col-md">
 			

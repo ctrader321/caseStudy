@@ -2,11 +2,11 @@ package com.WatchlistAndTracker.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.WatchlistAndTracker.entities.Show;
-import com.WatchlistAndTracker.entities.User;
 import com.WatchlistAndTracker.entities.UserCurrentShow;
 import com.WatchlistAndTracker.repo.UserCurrentShowRepository;
 
@@ -46,7 +46,9 @@ public class UserCurrentShowServices {
 		
 	}
 	
-	public UserCurrentShow removeUserCurrentShowByUser(String username, String showName) {
-		return ucsr.deleteUserCurrentShowByUsernameAndShowName(username, showName);
+	@Transactional
+	public void removeUserCurrentShowByUser(String username, String showName) {
+		us.getUser(username).getCurrentShowList().remove(shs.getShow(showName));
+		ucsr.deleteUserCurrentShowByUsernameAndShowName(username, showName);
 	}
 }

@@ -103,18 +103,19 @@ html, body {
 		<div class="col">
 			<p> Backlog empty? Try adding a show from our collection below!
 			<p style="color:red">${backlogAlreadyAdded}</p>
-			<form style="display: flex; flex-direction: column; justify-content: space-between; width: 50%" action="addToBacklog" method="post">
+			<p style="color:red">${alreadyInCurrent}</p>
+			<form:form  action="addToBacklog" methodAttribute="showAdd" method="post" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%">
 				<select name="showName" style="width:50%">
 					<c:forEach items="${showList}" var="show" begin="0">
 						<option value="${show.showName}">${show.showName}</option>
 					</c:forEach>
 				</select>
 				<br>
-				<input style="width: 50%" type="submit" name="removeFromBacklog" value="Add">	
-			</form>
+				<input style="width: 50%" type="submit" name="addToBacklog" value="Add">	
+			</form:form>
 			<br>
 			<p>Don't want to watch <i>that</i> show? Remove it here!</p>
-			<form style="display: flex; flex-direction: column; justify-content: space-between; width: 50%" action="removeFromBacklog" method="post">
+			<form:form action="removeFromBacklog" methodAttribute="showRemove" method="post" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%" >
 				<select name="showName" style="width:50%">
 					<c:forEach items="${backlogList}" var="show" begin="0">
 						<option value="${show.showName}">${show.showName}</option>
@@ -122,10 +123,10 @@ html, body {
 				</select> 
 				<br>
 				<input style="width: 50%" type="submit" name="removeFromBacklog" value="Remove">
-			</form>
+			</form:form>
 			<br>
 			<p>Want to move a show to your current watchlist? Select which one from the dropdown below!</p>
-			<form style="display: flex; flex-direction: column; justify-content: space-between; width: 50%" action="moveFromBackToCurrent" method="post">
+			<form:form action="moveFromBackToCurrent" methodAttribute="showMove" method="post" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%">
 				<select name="showName" style="width:50%">
 					<c:forEach items="${backlogList}" var="show" begin="0">
 						<option value="${show.showName}">${show.showName}</option>
@@ -133,7 +134,7 @@ html, body {
 				</select>
 				<br>
 				<input style="width: 50%" type="submit" name="moveToCurrent" value="Move">
-			</form>
+			</form:form>
 		</div>
 	</div>
 </div>

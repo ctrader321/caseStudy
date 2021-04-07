@@ -11,11 +11,7 @@ input{
 </style>
 <title>Registration</title>
 <%@include file="headCommonEnd.jsp" %>
-<%
-	String message = null;
-	
 
-%>
 	<div class="container" style="padding-top:10%">
 	  <div class="row">
 	    <div class="col">
@@ -25,13 +21,15 @@ input{
 	    	<form action="registerSubmit" method="post" style="display:flex; flex-direction:column">
 				Username: <input type="text" name="username" pattern="[a-zA-Z0-9-_]{4, 24}"><br>
 				<p style="color:red;">${usernameMessage}</p>
+				<p style="color:red;">${usernameShort}</p>
 				Password: <input type="text" name="userPassword"><br>
 				<p style="color:red">${passwordMessage}</p>
 				Verify Password: <input type="text" name="verifyPassword"><br>
 				<p style="color:red;">${message}</p>
 				<input type="submit" name="register" value="Register" style="width:50%">
-				<a href="login.jsp">Back to login</a>
+				
 			</form>
+			<a href="login">Back to login</a>
 	    </div>
 	    <div class="col">
 	    </div>

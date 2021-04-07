@@ -1,6 +1,7 @@
 package com.WatchlistAndTracker.entities;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -31,20 +32,15 @@ public class User {
 	
 	public User() {
 		super();
+		
 	}
+	
 	public User(String username, String userPassword) {
 		super();
 		this.username = username;
 		this.userPassword = userPassword;
 	}
 
-	public User(String username, String userPassword, List<Show> currentShowList, List<Show> backlogShowList) {
-		super();
-		this.username = username;
-		this.userPassword = userPassword;
-		this.currentShowList = currentShowList;
-		this.backlogShowList = backlogShowList;
-	}
 	public String getUsername() {
 		return username;
 	}
