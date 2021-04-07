@@ -29,15 +29,15 @@ public class MainController {
 	@Autowired
 	UserCurrentShowServices ucss;
 	
-	@ModelAttribute("user")
-	public User users() {
-		return new User();
-	}
-	
 	@RequestMapping("/")
 	public ModelAndView loginHandler1() {
 		ModelAndView mav = new ModelAndView("login");
 		return mav;
+	}
+	
+	@RequestMapping("/login")
+	public ModelAndView loginHandler2() {
+		return new ModelAndView("login");
 	}
 		
 	@RequestMapping("/index")
@@ -45,6 +45,7 @@ public class MainController {
 		ModelAndView mav = new ModelAndView("index");
 		User u = (User)request.getAttribute("user");
 		mav.addObject("user", u);
+		mav.addObject("allShowsInDb", shs.getAllShows());
 		return mav;
 	}
 		
@@ -54,8 +55,8 @@ public class MainController {
 		if(us.validateUser(username, userPassword) != null) {
 			User user = us.getUser(username);
 			request.getSession().setAttribute("user", user);
-			mav.addObject(user);
-			mav.setViewName("index");
+			mav.addObject("user",user);
+			return indexHandler(request);
 		} else {
 			request.setAttribute("message", "Unknown username/password. Please try again. Click Create an Account below if this is your first visit :)");
 			request.getRequestDispatcher("/");

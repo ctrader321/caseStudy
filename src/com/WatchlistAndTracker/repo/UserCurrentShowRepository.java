@@ -10,5 +10,7 @@ public interface UserCurrentShowRepository extends JpaRepository<UserCurrentShow
 
 	UserCurrentShow getUserCurrentShowByUsernameAndShowName(String username, String showName);
 	
+	UserCurrentShow deleteUserCurrentShowByUsernameAndShowName(String username, String showName);
+	
 	List<UserCurrentShow> findAllByUsername(String username);
 }

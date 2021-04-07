@@ -94,36 +94,37 @@
 		</div>
 		<div class="col">
 			<p> Backlog empty? Try adding a show from our collection below!
-			<form style="width:50%" action="addToBacklog" method="post">
+			<p style="color:red">${backlogAlreadyAdded}</p>
+			<form style="display: flex; flex-direction: column; justify-content: space-between; width: 50%" action="addToBacklog" method="post">
 				<select name="showName" style="width:50%">
 					<c:forEach items="${showList}" var="show" begin="0">
 						<option value="${show.showName}">${show.showName}</option>
 					</c:forEach>
 				</select>
 				<br>
-				<input type="submit" name="removeFromBacklog" value="Add">	
+				<input style="width: 50%" type="submit" name="removeFromBacklog" value="Add">	
 			</form>
 			<br>
-			<p>Don't want to eventually watch that show? Remove it here!</p>
-			<form style="width: 50%" action="removeFromBacklog" method="post">
+			<p>Don't want to watch <i>that</i> show? Remove it here!</p>
+			<form style="display: flex; flex-direction: column; justify-content: space-between; width: 50%" action="removeFromBacklog" method="post">
 				<select name="showName" style="width:50%">
 					<c:forEach items="${backlogList}" var="show" begin="0">
 						<option value="${show.showName}">${show.showName}</option>
 					</c:forEach>
 				</select> 
 				<br>
-				<input type="submit" name="removeFromBacklog" value="Remove">
+				<input style="width: 50%" type="submit" name="removeFromBacklog" value="Remove">
 			</form>
 			<br>
 			<p>Want to move a show to your current watchlist? Select which one from the dropdown below!</p>
-			<form style="width:50%" action="moveFromBackToCurrent" method="post">
+			<form style="display: flex; flex-direction: column; justify-content: space-between; width: 50%" action="moveFromBackToCurrent" method="post">
 				<select name="showName" style="width:50%">
 					<c:forEach items="${backlogList}" var="show" begin="0">
 						<option value="${show.showName}">${show.showName}</option>
 					</c:forEach>
 				</select>
 				<br>
-				<input type="submit" name="moveToCurrent" value="Move">
+				<input style="width: 50%" type="submit" name="moveToCurrent" value="Move">
 			</form>
 		</div>
 	</div>

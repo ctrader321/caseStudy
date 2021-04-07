@@ -45,4 +45,8 @@ public class UserCurrentShowServices {
 		return ucsr.findAllByUsername(username);
 		
 	}
+	
+	public UserCurrentShow removeUserCurrentShowByUser(String username, String showName) {
+		return ucsr.deleteUserCurrentShowByUsernameAndShowName(username, showName);
+	}
 }

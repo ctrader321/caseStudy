@@ -50,7 +50,7 @@ public class ListController {
 	}
 	
 	@RequestMapping(value="addToCurrent", method = RequestMethod.GET)
-	public ModelAndView userAddShowToCurrent(@ModelAttribute("show") Show show, HttpServletRequest request){
+	public ModelAndView userAddShowToCurrent(@ModelAttribute("show") Show show,@RequestParam("episodeToSet") String currentEpisode, HttpServletRequest request){
 		User u = (User)request.getSession().getAttribute("user");
 		if(u.getCurrentShowList().contains(shs.getShow(show.getShowName()))) {
 			request.setAttribute("alreadyInList", "You've already added that to your Current Watchlist!");
@@ -61,7 +61,7 @@ public class ListController {
 		} else if(!u.getCurrentShowList().contains(shs.getShow(show.getShowName()))){
 			u.getCurrentShowList().add(shs.getShow(show.getShowName()));
 			us.addUser(u);
-			UserCurrentShow updatedShow = ucss.linkUserCurrentShowToUser(u.getUsername(), shs.getShow(show.getShowName()).getShowName(), shs.getShow(show.getShowName()).getTotalEpisodes(), 0);	
+			UserCurrentShow updatedShow = ucss.linkUserCurrentShowToUser(u.getUsername(), shs.getShow(show.getShowName()).getShowName(), shs.getShow(show.getShowName()).getTotalEpisodes(), Integer.parseInt(currentEpisode));	
 			ucss.saveUserCurrentShow(updatedShow);
 		}
 				
@@ -80,20 +80,34 @@ public class ListController {
 		} else {
 			mav.setViewName("login");
 			request.setAttribute("loginAgainMessage", "Please sign in again!");
+			return mav;
 		}
-		return mav;
+		return currentHandler(request);
 	}
 	
+	@RequestMapping(value="removeFromCurrent", method = RequestMethod.GET)
+	public ModelAndView userRemoveShowInCurrent(@ModelAttribute("show") Show show, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("currentWatchlist");
+		if((User)request.getSession().getAttribute("user") != null) {
+			User u = (User)request.getSession().getAttribute("user");
+			u.getCurrentShowList().remove(shs.getShow(show.getShowName()));
+			us.addUser(u);
+			ucss.removeUserCurrentShowByUser(u.getUsername(), show.getShowName());
+		} else {
+			mav.setViewName("login");
+			request.setAttribute("loginAgainMessage", "Please sign in again!");
+			return mav;
+		}
+		return currentHandler(request);
+	}
 	
 	@RequestMapping(value = "/backlogWatchlist", method = RequestMethod.GET)
 	public ModelAndView backlogHandler(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("backlogWatchlist");
 		if ((User)request.getSession().getAttribute("user") != null) {
 			User u = (User)request.getSession().getAttribute("user");
-			List<Show> userBacklog = u.getBacklogShowList();
-			List<Show> allShows = shs.getAllShows();
-			mav.addObject("showList", allShows);
-			mav.addObject("backlogList", userBacklog);
+			mav.addObject("showList", shs.getAllShows());
+			mav.addObject("backlogList", u.getBacklogShowList());
 			
 		}else {
 			mav.setViewName("login");
@@ -104,10 +118,18 @@ public class ListController {
 	
 	@RequestMapping(value="addToBacklog", method = RequestMethod.POST)
 	public ModelAndView userAddShowToBacklog(@ModelAttribute("show") Show show, HttpServletRequest request){
-		User u = (User)request.getSession().getAttribute("user");
-		u.getBacklogShowList().add(shs.getShow(show.getShowName()));
-		us.addUser(u);
+		if((User)request.getSession().getAttribute("user") != null) {
+			User u = (User)request.getSession().getAttribute("user");
+			if(u.getBacklogShowList().contains(shs.getShow(show.getShowName()))){
+				request.setAttribute("backlogAlreadyAdded", "You've already added that to your Backlog Watchlist!");
+				return backlogHandler(request);
+			}else {
+				u.getBacklogShowList().add(shs.getShow(show.getShowName()));
+				us.addUser(u);
+			}
+		}
 		return backlogHandler(request);
+		
 	}
 	
 	@RequestMapping(value="removeFromBacklog", method = RequestMethod.POST)

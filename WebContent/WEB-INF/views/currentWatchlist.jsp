@@ -66,30 +66,45 @@
 	<div class="container">
 		<div class="row" style = "padding-top:5%">
 			<div class = "col">
+			<p>Select a show to add (Total episode count)</p>
+			<p style="color:red">${alreadyInList}</p>
 				<form action="addToCurrent" method= "get" style="display:flex; flex-direction:column; justify-content:space-between; width:50%">
-					<span>Select a show to add (Total episode count)</span>
 					<select name="showName">
 						<c:forEach items="${showList}" var="show" begin="0">
 							<option value="${show.showName}">${show.showName} == ${show.totalEpisodes}</option>
 						</c:forEach>
 					</select>
 					<label>Which episode are you on?</label>
-					<input style="width:50%" type="text">
-					<p style="color:red">${alreadyInList}</p>
+					<input name="episodeToSet" id="episodeForAddTo" style="width:50%" type="text">
+					<script type="text/javascript">
+						document.getElementById("episodeForAddTo").value = '0';
+					</script>
 					<input style="width:50%" type="submit" name="addToCurrent" value="Add"> 				
 				</form>
 				<br>
-				<form action="editInCurrent" method="get" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%">
-					<span>Select a show to edit</span> 
+				<p>Select a show to edit</p> 
+				<form action="editInCurrent" method="get" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%">	
 					<select	name="showName">
 						<c:forEach items="${currentShows}" var="show" begin="0">
-							<option value="${show.showName}">${show.showName} == ${show.totalEpisodes}</option>
+							<option value="${show.showName}">${show.showName}</option>
 						</c:forEach>
 					</select>
 					<label>Which episode did you most recently finish?</label> 
-					<input style="width: 50%" type="text" name="episodeNumberToSet">
-					<p style="color: red"></p>
+					<input style="width: 50%" type="text" id="episodeForEditIn" name="episodeNumberToSet">
+						<script type="text/javascript">
+							document.getElementById("episodeForEditIn").value = '0';
+						</script>
 					<input style="width: 50%" type="submit" name="addToCurrent" value="Add">
+				</form>
+				<br>
+				<p>Select a show to remove!</p> 
+				<form action="removeFromCurrent" method="get" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%">
+					<select	name="showName">
+						<c:forEach items="${currentShows}" var="show" begin="0">
+							<option value="${show.showName}">${show.showName}</option>
+						</c:forEach>
+					</select>
+					<input style="width: 50%" type="submit" name="removeFromCurrent" value="Remove">
 				</form>
 		</div>
 			<div class = "col-md">
