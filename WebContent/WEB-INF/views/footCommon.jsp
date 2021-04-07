@@ -1,4 +1,4 @@
-	<div class="container" style="padding-top:10%">
+	<div class="container" style="padding-top:15%">
 		<div class="row justify-content-center">
 			<div class="col-4">
 			<p> Copyright 2021 © "WatchlistAndTracker" All Rights Reserved.</p>

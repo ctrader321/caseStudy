@@ -1,17 +1,25 @@
 <%@include file="headCommon.jsp"%>
 <%@ page import="com.WatchlistAndTracker.entities.User"%>
 <style>
+html, body {
+	font-family: 'ABeeZee', sans-serif;
+	background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(226,197,134,1) 100%);
+	height:100%;
+	width:100%;
+	margin:0px;
+	padding:0px;
+}
 .tg {
 	border-collapse: collapse;
-	border-color: #C44D58;
+	border-color: #2276c3;
 	border-spacing: 0;
 	border-style: solid;
 	border-width: 1px;
 }
 
 .tg td {
-	background-color: #F9CDAD;
-	border-color: #C44D58;
+	background-color: #26c1e2;
+	border-color: #2276c3;
 	border-style: solid;
 	border-width: 0px;
 	color: #002b36;
@@ -23,8 +31,7 @@
 }
 
 .tg th {
-	background-color: #FE4365;
-	border-color: #C44D58;
+	border-color: #2276c3;
 	border-style: solid;
 	border-width: 0px;
 	color: #fdf6e3;
@@ -37,13 +44,14 @@
 }
 
 .tg .tg-0pky {
+	background-color:#F9CDAD;
 	border-color: inherit;
 	text-align: right;
 	vertical-align: top
 }
 
 .tg .tg-brdm {
-	background-color: #FFA4A0;
+	background-color: #26c1e2;
 	border-color: inherit;
 	text-align: right;
 	vertical-align: top
@@ -66,15 +74,15 @@
 		
 		<div class="col">
 			
-			<h1>Backlog Watchlist: </h1>
+			<h1 style="color:#6c757d">Backlog Watchlist: </h1>
 			
-			<table class = "tg" style="width:75%">
+			<table class = "tg" style="width:75%;">
 				<tr>
-					<th class="tg-0pky" style="text-align: left">
+					<th class="tg-0pky" style="text-align: left; background-color: #2276c3;">
 						Show Name:
 					</th>
 
-					<th class="tg-0pky" style="text-align: left">
+					<th class="tg-0pky" style="text-align: left; background-color: #2276c3;">
 						Total Episodes:
 					</th>
 				</tr>
@@ -84,7 +92,7 @@
 							<td width="10%" class="tg-0pky">
 								<c:out value="${i.getShowName()}"></c:out>
 							</td>
-							<td width="10%" class="tg-0pky">
+							<td width="5%" class="tg-brdm">
 								<c:out value="${i.getTotalEpisodes()}"></c:out>
 							</td>
 						</tr>

@@ -1,12 +1,19 @@
 <%@include file="headCommon.jsp"%>
 <%@ page import="com.WatchlistAndTracker.entities.User"%>
 <style>
-body {
+
+html, body {
 	font-family: 'ABeeZee', sans-serif;
+	background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(226,197,134,1) 100%);
+	height:100%;
+	width:100%;
+	margin:0px;
+	padding:0px;
 }
+
 .tg {
 	border-collapse: collapse;
-	border-color: #C44D58;
+	border-color: #2276c3;
 	border-spacing: 0;
 	border-style: solid;
 	border-width: 1px;
@@ -14,7 +21,7 @@ body {
 
 .tg td {
 	background-color: #F9CDAD;
-	border-color: #C44D58;
+	border-color: #2276c3;
 	border-style: solid;
 	border-width: 0px;
 	color: #002b36;
@@ -26,8 +33,8 @@ body {
 }
 
 .tg th {
-	background-color: #FE4365;
-	border-color: #C44D58;
+	background-color: #2276c3;
+	border-color: #2276c3;;
 	border-style: solid;
 	border-width: 0px;
 	color: #fdf6e3;
@@ -94,11 +101,12 @@ body {
 				</table>
 			</div>
 			<div class="col">
-				<form action="addShowToDb" method="post">
-					<label>Please enter a show you want to add!</label>
-					<input type="text" name="showName">
-					<label>Please enter the total number of episodes in your show!</label>
-					<input type="text" name="totalEpisodes">
+				<form action="addShowToDb" method="post" style="display:flex; flex-direction:column;" >
+					<h2>Please enter a show you want to add!</h2>
+					<input type="text" name="showName" style="width:60%"><br><br>
+					<h2>Please enter the total number of episodes in your show!</h2>
+					<input type="text" name="totalEpisodes" style="width:40%"><br>
+					<input type="submit" name="addShowToForm" value="Add" style="width:40%">
 				</form>
 			</div>
 		</div>
