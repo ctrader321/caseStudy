@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.WatchlistAndTracker.entities.Show;
@@ -38,9 +39,9 @@ public class ListController {
 		if((User)request.getSession().getAttribute("user")!= null) {
 			User u = (User)request.getSession().getAttribute("user");
 			List<UserCurrentShow> userCurrentShowByUsername = ucss.getAllUserCurrentShowByUsername(u.getUsername());
-			List<Show> allShows = shs.getAllShows();
 			mav.addObject("userList", userCurrentShowByUsername);
-			mav.addObject("showList", allShows);
+			mav.addObject("showList", shs.getAllShows());
+			mav.addObject("currentShows", u.getCurrentShowList());
 		} else {
 			mav.setViewName("login");
 			request.setAttribute("loginAgainMessage", "Please sign in again!");
@@ -51,28 +52,36 @@ public class ListController {
 	@RequestMapping(value="addToCurrent", method = RequestMethod.GET)
 	public ModelAndView userAddShowToCurrent(@ModelAttribute("show") Show show, HttpServletRequest request){
 		User u = (User)request.getSession().getAttribute("user");
-		System.out.println(show.getShowName());
 		if(u.getCurrentShowList().contains(shs.getShow(show.getShowName()))) {
-			
-			System.out.println(u.getCurrentShowList().contains(shs.getShow(show.getShowName())));
 			request.setAttribute("alreadyInList", "You've already added that to your Current Watchlist!");
 			return currentHandler(request);
-		}else {
+		}else if(u.getBacklogShowList().contains(shs.getShow(show.getShowName()))) {
+			u.getBacklogShowList().remove(shs.getShow(show.getShowName()));
+			us.addUser(u);
+		} else if(!u.getCurrentShowList().contains(shs.getShow(show.getShowName()))){
 			u.getCurrentShowList().add(shs.getShow(show.getShowName()));
 			us.addUser(u);
-			ucss.linkUserCurrentShowToUser(u.getUsername(), shs.getShow(show.getShowName()).getShowName(), shs.getShow(show.getShowName()).getTotalEpisodes(), 0);	
-
+			UserCurrentShow updatedShow = ucss.linkUserCurrentShowToUser(u.getUsername(), shs.getShow(show.getShowName()).getShowName(), shs.getShow(show.getShowName()).getTotalEpisodes(), 0);	
+			ucss.saveUserCurrentShow(updatedShow);
 		}
 				
 		return currentHandler(request);
 	}
 	
-	@RequestMapping(value="editCurrent", method = RequestMethod.GET)
-	public ModelAndView userEditShowInCurrent(@ModelAttribute("show") Show show, HttpServletRequest request) {
-		
-		
-		
-		return currentHandler(request);
+	@RequestMapping(value="editInCurrent", method = RequestMethod.GET)
+	public ModelAndView userEditShowInCurrent(@ModelAttribute("show") Show show,@RequestParam("episodeNumberToSet") String currentEpisode, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("currentWatchlist");
+		if((User)request.getSession().getAttribute("user") != null) {
+			User u = (User)request.getSession().getAttribute("user");
+			UserCurrentShow foundShow = ucss.getUserCurrentShow(u.getUsername(), show.getShowName());
+			foundShow.setCurrentEpisode(Integer.parseInt(currentEpisode));
+			foundShow.setCompletionPercentage(Integer.parseInt(currentEpisode));
+			ucss.saveUserCurrentShow(foundShow);
+		} else {
+			mav.setViewName("login");
+			request.setAttribute("loginAgainMessage", "Please sign in again!");
+		}
+		return mav;
 	}
 	
 	

@@ -26,7 +26,7 @@ public class RegistrationController {
 	@RequestMapping("registerSubmit")
 	public ModelAndView registerUserHandler(@ModelAttribute User user, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("register");
-		if(user.getUserPassword().equals(user.getVerifyPassword()) && user.getUserPassword().length() > 0) {
+		if(user.getUserPassword().equals(user.getVerifyPassword()) && user.getUserPassword().length() >= 6) {
 			if(us.getUser(user.getUsername()) != null) {
 				request.setAttribute("usernameMessage", "Username already taken, please use another.");
 				request.getRequestDispatcher("/register");
@@ -36,7 +36,7 @@ public class RegistrationController {
 			}
 		} else {
 			request.setAttribute("message", "\"Password\" field must match \"Verify Password\" field. Please try again.");
-			if(user.getUserPassword().length() < 7) {
+			if(user.getUserPassword().length() <= 6) {
 				request.setAttribute("passwordMessage", "\"Password\" must be greater than 6 characters.");
 				request.getRequestDispatcher("/register");
 			}

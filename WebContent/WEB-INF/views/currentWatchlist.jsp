@@ -78,7 +78,20 @@
 					<p style="color:red">${alreadyInList}</p>
 					<input style="width:50%" type="submit" name="addToCurrent" value="Add"> 				
 				</form>
-			</div>
+				<br>
+				<form action="editInCurrent" method="get" style="display: flex; flex-direction: column; justify-content: space-between; width: 50%">
+					<span>Select a show to edit</span> 
+					<select	name="showName">
+						<c:forEach items="${currentShows}" var="show" begin="0">
+							<option value="${show.showName}">${show.showName} == ${show.totalEpisodes}</option>
+						</c:forEach>
+					</select>
+					<label>Which episode did you most recently finish?</label> 
+					<input style="width: 50%" type="text" name="episodeNumberToSet">
+					<p style="color: red"></p>
+					<input style="width: 50%" type="submit" name="addToCurrent" value="Add">
+				</form>
+		</div>
 			<div class = "col-md">
 			
 				<h1>Current Watchlist:</h1>

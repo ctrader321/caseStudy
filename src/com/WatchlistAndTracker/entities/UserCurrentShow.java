@@ -75,8 +75,8 @@ public class UserCurrentShow {
 		return completionPercentage;
 	}
 
-	public void setCompletionPercentage(int currentEpisode, int totalEpisodes) {
-		this.completionPercentage = currentEpisode / totalEpisodes;
+	public void setCompletionPercentage(int currentEpisode) {
+		this.completionPercentage = Double.parseDouble(df.format(100*((double)currentEpisode)/((double)this.totalEpisodes)));
 	}
 
 	@Override

@@ -22,13 +22,17 @@ public class UserCurrentShowServices {
 	@Autowired
 	ShowServices shs;
 		
+	public UserCurrentShow saveUserCurrentShow(UserCurrentShow currentShow) {
+		return ucsr.save(currentShow);
+	}
+	
 	public UserCurrentShow getUserCurrentShow(String username, String showName) {
 		return ucsr.getUserCurrentShowByUsernameAndShowName(username, showName);
 	}
 	
-	public void linkUserCurrentShowToUser(String username, String showName, int totalEpisodes, int currentEpisode) {
+	public UserCurrentShow linkUserCurrentShowToUser(String username, String showName, int totalEpisodes, int currentEpisode) {
 		UserCurrentShow userCurrentShow = new UserCurrentShow(username, showName, totalEpisodes, currentEpisode);
-		ucsr.save(userCurrentShow);
+		return ucsr.save(userCurrentShow);
 	}
 	
 	public void updateShowCurrentEpisode(String username, String showName, int currentEpisode) {

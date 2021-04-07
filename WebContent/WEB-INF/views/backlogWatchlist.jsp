@@ -95,7 +95,7 @@
 		<div class="col">
 			<p> Backlog empty? Try adding a show from our collection below!
 			<form style="width:50%" action="addToBacklog" method="post">
-				<select name="showName">
+				<select name="showName" style="width:50%">
 					<c:forEach items="${showList}" var="show" begin="0">
 						<option value="${show.showName}">${show.showName}</option>
 					</c:forEach>
@@ -106,7 +106,7 @@
 			<br>
 			<p>Don't want to eventually watch that show? Remove it here!</p>
 			<form style="width: 50%" action="removeFromBacklog" method="post">
-				<select name="showName">
+				<select name="showName" style="width:50%">
 					<c:forEach items="${backlogList}" var="show" begin="0">
 						<option value="${show.showName}">${show.showName}</option>
 					</c:forEach>
@@ -117,7 +117,7 @@
 			<br>
 			<p>Want to move a show to your current watchlist? Select which one from the dropdown below!</p>
 			<form style="width:50%" action="moveFromBackToCurrent" method="post">
-				<select name="showName">
+				<select name="showName" style="width:50%">
 					<c:forEach items="${backlogList}" var="show" begin="0">
 						<option value="${show.showName}">${show.showName}</option>
 					</c:forEach>
