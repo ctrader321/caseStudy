@@ -50,7 +50,7 @@ public class ListController {
 	}
 	
 	@RequestMapping(value="addToCurrent", method = RequestMethod.GET)
-	public ModelAndView userAddShowToCurrent(@ModelAttribute("showAdd") Show show,@RequestParam("episodeToSet") String currentEpisode, HttpServletRequest request){
+	public ModelAndView userAddShowToCurrent(@ModelAttribute("showAdd") Show show,@RequestParam("episodeToSet") Integer currentEpisode, HttpServletRequest request){
 		User z = (User)request.getSession().getAttribute("user");
 		User u = us.getUser(z.getUsername());
 		if(u.getCurrentShowList().contains(shs.getShow(show.getShowName()))) {
@@ -62,7 +62,7 @@ public class ListController {
 		} else if(!u.getCurrentShowList().contains(shs.getShow(show.getShowName()))){
 			u.getCurrentShowList().add(shs.getShow(show.getShowName()));
 			us.addUser(u);
-			UserCurrentShow updatedShow = ucss.linkUserCurrentShowToUser(u.getUsername(), shs.getShow(show.getShowName()).getShowName(), shs.getShow(show.getShowName()).getTotalEpisodes(), Integer.parseInt(currentEpisode));	
+			UserCurrentShow updatedShow = ucss.linkUserCurrentShowToUser(u.getUsername(), shs.getShow(show.getShowName()).getShowName(), shs.getShow(show.getShowName()).getTotalEpisodes(), currentEpisode);	
 			ucss.saveUserCurrentShow(updatedShow);
 		}
 				
@@ -70,14 +70,14 @@ public class ListController {
 	}
 	
 	@RequestMapping(value="editInCurrent", method = RequestMethod.GET)
-	public ModelAndView userEditShowInCurrent(@ModelAttribute("showEdit") Show show,@RequestParam("episodeNumberToSet") String currentEpisode, HttpServletRequest request) {
+	public ModelAndView userEditShowInCurrent(@ModelAttribute("showEdit") Show show,@RequestParam("episodeNumberToSet") Integer currentEpisode, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("currentWatchlist");
 		if((User)request.getSession().getAttribute("user") != null) {
 			User z = (User)request.getSession().getAttribute("user");
 			User u = us.getUser(z.getUsername());
 			UserCurrentShow foundShow = ucss.getUserCurrentShow(u.getUsername(), show.getShowName());
-			foundShow.setCurrentEpisode(Integer.parseInt(currentEpisode));
-			foundShow.setCompletionPercentage(Integer.parseInt(currentEpisode));
+			foundShow.setCurrentEpisode(currentEpisode);
+			foundShow.setCompletionPercentage(currentEpisode);
 			ucss.saveUserCurrentShow(foundShow);
 		} else {
 			mav.setViewName("login");
@@ -131,9 +131,7 @@ public class ListController {
 				return backlogHandler(request);
 			}else {
 				u.getBacklogShowList().add(shs.getShow(show.getShowName()));
-				System.out.println(u.getBacklogShowList());
 				us.addUser(u);
-				System.out.println(u.getBacklogShowList());
 
 			}
 		}
@@ -153,10 +151,14 @@ public class ListController {
 	public ModelAndView userMoveFromBacklogToCurrent(@ModelAttribute("showMove") Show show, HttpServletRequest request, HttpServletResponse response) {
 		User z = (User)request.getSession().getAttribute("user");
 		User u = us.getUser(z.getUsername());
-		u.getBacklogShowList().remove(shs.getShow(show.getShowName()));
-		u.getCurrentShowList().add(shs.getShow(show.getShowName()));
-		ucss.linkUserCurrentShowToUser(u.getUsername(), shs.getShow(show.getShowName()).getShowName(), shs.getShow(show.getShowName()).getTotalEpisodes(), 0);	
-		us.addUser(u);
+		if(!u.getCurrentShowList().contains(shs.getShow(show.getShowName()))) {
+			u.getBacklogShowList().remove(shs.getShow(show.getShowName()));
+			u.getCurrentShowList().add(shs.getShow(show.getShowName()));
+			ucss.linkUserCurrentShowToUser(u.getUsername(), shs.getShow(show.getShowName()).getShowName(), shs.getShow(show.getShowName()).getTotalEpisodes(), 0);	
+			us.addUser(u);
+		} else {
+			
+		}
 		return backlogHandler(request);
 		
 	}

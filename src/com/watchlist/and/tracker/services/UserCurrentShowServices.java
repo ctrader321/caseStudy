@@ -42,7 +42,7 @@ public class UserCurrentShowServices {
 	}
 	
 	public List<UserCurrentShow> getAllUserCurrentShowByUsername(String username){
-		return ucsr.findAllByUsernameOrderByCompletionPercentageDesc(username);
+		return ucsr.findAllByUsernameOrderByCompletionPercentageAscTotalEpisodesDesc(username);
 		
 	}
 	

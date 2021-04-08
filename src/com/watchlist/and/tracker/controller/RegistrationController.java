@@ -37,7 +37,7 @@ public class RegistrationController {
 			request.getRequestDispatcher("/register");
 		}
 		if(us.getUser(user.getUsername()) != null) {
-			request.setAttribute("usernameMessage", "Username already taken, please use another.");
+			request.setAttribute("usernameMessage", "Username already taken, please try another.");
 			request.getRequestDispatcher("/register");
 		}
 		if (!user.getUserPassword().equals(user.getVerifyPassword())){
@@ -45,7 +45,7 @@ public class RegistrationController {
 			request.getRequestDispatcher("/register");
 		}
 		if(user.getUserPassword().length() < 6) {
-				request.setAttribute("passwordMessage", "\"Password\" must be greater than 6 characters.");
+				request.setAttribute("passwordMessage", "\"Password\" must be at least 6 characters.");
 				request.getRequestDispatcher("/register");
 		}
 		

@@ -84,7 +84,7 @@ html, body {
 						</c:forEach>
 					</select>
 					<label>Which episode are you on?</label>
-					<input name="episodeToSet" id="episodeForAddTo" style="width:50%" type="text">
+					<input name="episodeToSet" id="episodeForAddTo" style="width:50%" type="number">
 					<script type="text/javascript">
 						document.getElementById("episodeForAddTo").value = '0';
 					</script>
@@ -99,7 +99,7 @@ html, body {
 						</c:forEach>
 					</select>
 					<label>Which episode did you most recently finish?</label> 
-					<input style="width: 50%" type="text" id="episodeForEditIn" name="episodeNumberToSet">
+					<input style="width: 50%" type="number" id="episodeForEditIn" name="episodeNumberToSet">
 						<script type="text/javascript">
 							document.getElementById("episodeForEditIn").value = '0';
 						</script>
@@ -148,8 +148,9 @@ html, body {
 									<c:out value="${i.getTotalEpisodes()}"></c:out>
 								</td>
 								<td width = "10%" class="tg-brdm">
-									<c:out value="${i.getCompletionPercentage()}"></c:out>
-								</td>
+									<c:if test="${i.getCompletionPercentage() >= 100 }">Completed</c:if>
+									<c:if test="${i.getCompletionPercentage() < 100 }">${i.completionPercentage}</c:if>
+									</td>	
 							</tr>
 						</c:forEach>
 					</tbody>

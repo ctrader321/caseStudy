@@ -1,9 +1,12 @@
 <%@include file="headCommon.jsp"%>
 <style>
-#wow{
-	height:100px;
-	width:200px;
-	background:green;
+html, body {
+	font-family: 'ABeeZee', sans-serif;
+	background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(226,197,134,1) 100%);
+	height:100%;
+	width:100%;
+	margin:0px;
+	padding:0px;
 }
 </style>
 <title>Logging Out!</title>

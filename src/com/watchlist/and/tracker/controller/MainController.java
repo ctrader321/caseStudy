@@ -61,7 +61,7 @@ public class MainController {
 			request.getRequestDispatcher("/");
 		}
 
-		return "redirect:/login";
+		return "/login";
 	}
 	
 	@RequestMapping(value="addShowToDb", method = RequestMethod.POST)

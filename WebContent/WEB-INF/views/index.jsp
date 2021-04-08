@@ -106,7 +106,7 @@ html, body {
 					<h2>Please enter a show you want to add!</h2>
 					<input type="text" name="showName" style="width:60%"><br><br>
 					<h2>Please enter the total number of episodes in your show!</h2>
-					<input type="text" name="totalEpisodes" id="totalEp" style="width:40%"><br>
+					<input type="number" name="totalEpisodes" id="totalEp" style="width:40%"><br>
 						<script type="text/javascript">
 							document.getElementById("totalEp").value = '0';
 						</script>

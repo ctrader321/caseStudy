@@ -12,6 +12,6 @@ public interface UserCurrentShowRepository extends JpaRepository<UserCurrentShow
 	
 	void deleteUserCurrentShowByUsernameAndShowName(String username, String showName);
 	
-	List<UserCurrentShow> findAllByUsernameOrderByCompletionPercentageDesc(String username);
+	List<UserCurrentShow> findAllByUsernameOrderByCompletionPercentageAscTotalEpisodesDesc(String username);
 	
 }
