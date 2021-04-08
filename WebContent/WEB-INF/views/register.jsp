@@ -1,5 +1,5 @@
 
-<%@ page import="com.WatchlistAndTracker.entities.User" %>
+<%@ page import="com.watchlist.and.tracker.entities.User" %>
 <%@include file="headCommon.jsp" %>
 <style>
 .col-5{

@@ -1,8 +1,8 @@
 <%@include file="headCommon.jsp"%>
-<%@ page import="com.WatchlistAndTracker.entities.User"%>
-<%@ page import="com.WatchlistAndTracker.entities.UserCurrentShow"%>
-<%@ page import="com.WatchlistAndTracker.services.UserCurrentShowServices"%>
-<%@ page import="com.WatchlistAndTracker.services.ShowServices"%>
+<%@ page import="com.watchlist.and.tracker.entities.User"%>
+<%@ page import="com.watchlist.and.tracker.entities.UserCurrentShow"%>
+<%@ page import="com.watchlist.and.tracker.services.UserCurrentShowServices"%>
+<%@ page import="com.watchlist.and.tracker.services.ShowServices"%>
 <%@ page import="java.util.List" %>
 <style>
 html, body {
