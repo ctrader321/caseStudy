@@ -36,7 +36,7 @@
 			<version>2.4.4</version>
 		</dependency>
 
-		<!-- JUNIT -->
+		<!-- testing dep -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -49,6 +49,14 @@
 			<version>5.6.2</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <version>1.4.200</version>
+		    <scope>runtime</scope>
+		</dependency>
+		
 
 		<!-- Hibernate -->
 		<dependency>
@@ -88,6 +96,16 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>2.2.0.RELEASE</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>5.3.5</version>
+		    <scope>test</scope>
+		</dependency>
+
+		
 
 		<!-- JAVAX -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->

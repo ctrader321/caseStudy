@@ -2,6 +2,7 @@ package com.WatchlistAndTracker.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -24,6 +25,7 @@ import static org.hibernate.cfg.AvailableSettings.*;
 @EnableTransactionManagement
 @EnableJpaRepositories("com.WatchlistAndTracker.repo")
 @PropertySource("classpath:database.properties")
+@ComponentScan(basePackages = {"com.WatchlistAndTracker"})
 public class DataConfig {
 
 	@Autowired
